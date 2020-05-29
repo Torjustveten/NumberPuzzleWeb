@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NumberPuzzleWeb.Core.ApplicationServices;
 using NumberPuzzleWeb.Core.DomainServices;
 using NumberPuzzleWeb.Infrastructure.DataAccess.Repository;
 
@@ -28,7 +29,8 @@ namespace NumberPuzzleWeb
         {
             services.AddControllers();
 
-            services.AddScoped<IGameModelRepository, InMemoryGameModelRepository>();
+            services.AddSingleton<IGameModelRepository, InMemoryGameModelRepository>();
+            services.AddScoped<GameService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

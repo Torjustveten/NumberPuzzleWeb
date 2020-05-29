@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using NumberPuzzleWeb.API.ViewModel;
 using NumberPuzzleWeb.Core.ApplicationServices;
 using NumberPuzzleWeb.Core.DomainModel;
 
@@ -12,13 +13,17 @@ namespace NumberPuzzleWeb.API.Controllers
     [ApiController]
     public class GameController : Controller
     {
+        private GameService _gameService;
+
         public GameController(GameService gameService)
         {
             
         }
         [HttpGet]
-        public async Task<GameModel> StartGame()
+        public async Task<GameViewModel> StartGame()
         {
+            var game = await _gameService.StartGame();
+            return new GameViewModel(game.Id.ToString(), game.PlayCount, game.IsSolved, game.Numbers);
         }
 
         [HttpGet("{gameId}")]
