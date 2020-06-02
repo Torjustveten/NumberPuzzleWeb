@@ -13,29 +13,37 @@ namespace NumberPuzzleWeb.API.Controllers
     [ApiController]
     public class GameController : Controller
     {
-        private GameService _gameService;
+        private readonly GameService _gameService;
 
         public GameController(GameService gameService)
         {
-            
+            _gameService = gameService;
         }
         [HttpGet]
+
         public async Task<GameViewModel> StartGame()
         {
             var game = await _gameService.StartGame();
-            return new GameViewModel(game.Id.ToString(), game.PlayCount, game.IsSolved, game.Numbers);
+            return ViewModelFromDomainModel(game);
         }
 
         [HttpGet("{gameId}")]
-        public async Task<GameModel> Read(Guid gameId)
+        public async Task<GameViewModel> Read(string gameId)
         {
-           
+            var game = await _gameService.Read(new Guid(gameId));
+            return ViewModelFromDomainModel(game);
         }
 
         [HttpPost]
-        public async Task<GameModel> Play(int index, Guid gameId)
+        public async Task<GameViewModel> Play(PlayViewModel play)
         {
-            
+            var game = await _gameService.Play(play.Index, new Guid(play.GameId));
+            return ViewModelFromDomainModel(game);
+        }
+
+        private static GameViewModel ViewModelFromDomainModel(GameModel game)
+        {
+            return new GameViewModel(game.Id.ToString(), game.PlayCount, game.IsSolved, game.Numbers);
         }
     }
 }
