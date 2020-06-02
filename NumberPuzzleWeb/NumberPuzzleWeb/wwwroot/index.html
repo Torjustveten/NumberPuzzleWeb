@@ -42,14 +42,14 @@
         }
 
         async function startGame() {
-            let response = await axios.get('/api/game');
+            const response = await axios.get('/api/game');
             gameModel = response.data;
             console.log(gameModel);
             show();
         }
 
         async function readGame(gameId) {
-            let response = await axios.get('/api/game/' + gameId);
+            const response = await axios.get('/api/game/' + gameId);
             gameModel = response.data;
             console.log(gameModel);
             show();
