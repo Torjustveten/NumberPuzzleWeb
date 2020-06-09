@@ -29,7 +29,7 @@ namespace NumberPuzzleWeb
         {
             services.AddControllers();
 
-            services.AddSingleton<IGameModelRepository, InMemoryGameModelRepository>();
+            services.AddScoped<IGameModelRepository, GameModelRepository>();
             services.AddScoped<GameService>();
             services.AddSwaggerDocument();
         }

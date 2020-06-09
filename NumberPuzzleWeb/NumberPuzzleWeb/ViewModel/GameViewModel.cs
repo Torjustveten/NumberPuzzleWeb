@@ -7,14 +7,14 @@ namespace NumberPuzzleWeb.API.ViewModel
 {
     public class GameViewModel
     {
-        public string id { get; set; }
+        public string Id { get; set; }
         public int PlayCount { get; set; }
         public bool IsSolved { get; set; }
         public char[] Numbers { get; set; }
 
         public GameViewModel(string id, int playCount, bool isSolved, char[] numbers)
         {
-            this.id = id;
+            this.Id = id;
             PlayCount = playCount;
             IsSolved = isSolved;
             Numbers = numbers;
